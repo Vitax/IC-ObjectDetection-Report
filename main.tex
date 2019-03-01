@@ -1,33 +1,90 @@
-\documentclass{article}
+\documentclass[ a4paper, 12pt, oneside, onecolumn, final, openany ]{article}
 
+\usepackage[left=4cm, right=4cm, top=3cm]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
 
+\usepackage{tikz}
+\usepackage{cite}
+\usepackage[pdftex]{hyperref}
+
+\usepackage{titlesec}
 \usepackage{amsmath}
 \usepackage{graphicx}
 
 \usepackage{subfiles}
 \usepackage{blindtext}
 
+% remove the "chapter x" suffix
+\titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
+
 \graphicspath{{images}{../images}}
 
 \begin{document}
 
     \begin{titlepage}
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/htw-logo.jpg}\par\vspace{1cm}
 
-        \begin{center}
-            \includegraphics[width=0.5\textwidth]{images/htw-logo.jpg}
-        \end{center}
+        \vspace{1cm}
+        {\scshape\Large Independent Course work Report\par}
 
-        \title{Realtime Object Detection}
-        \author{Calgar Özel}
-        \date{17.Februar.2019}
+        \vspace{1.5cm}
+        {\Large\bfseries Object Detection with Bounding Boxes through Machine Learning }
+        
+        \vspace{2cm}
+        {\Large\itshape Caglar Özel\par}
 
+        \vfill
+        supervised by\par
+        Prof.\ Dr.\ Klaus\ Jung
+
+
+        \vfill
     \end{titlepage}
 
-    \maketitle
+    \tableofcontents
 
-    \section{Introduction}
-    \subfile{sections/introduction}
+    \newpage
+
+    \chapter{Abstract}
+    \subfile{sections/abstract.tex}
+
+    \chapter{Introduction}
+    \subfile{sections/introduction.tex}
+
+    % Write about
+    %   - development
+    %   - use cases
+    %   - state of the art
+    \chapter{Object Detection}
+    \subfile{sections/object_detection.tex}
+
+    % Write about tensorflow 
+    %   - short background on tensorflow
+    %   - ways of training/ new architecture (code or config), new model existing layout , transfer learning
+    %   - setup for training (cpu, gpu, cuda, cudnn)
+    %   - short background on cuda and cudnn
+    %   - training a model
+    %   - analysis of model
+    \chapter{Tensorflow}
+    \subfile{sections/tensorflow.tex}
+
+    % Write about 
+    %   - Structure of application
+    %   - Implementation of Tensorflow
+    %   - Cases for Image or Audio Visual object detection
+    \chapter{Application}
+    \subfile{sections/application.tex}
+
+    % Conclude with summing up
+    %   - Results
+    %   - Efficiency
+    %   - Future of Object Detection
+    \chapter{Conclusion}
+    \subfile{sections/conclusion.tex}
+
+    \bibliographystyle{unsrt}
+    \bibliography{references}
 
 \end{document}
