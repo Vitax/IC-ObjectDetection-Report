@@ -171,8 +171,7 @@ A selective search algorithm is subjected into 3 design ideas:
             \includegraphics[width=0.5\textwidth]{images/breakfast_fnh.jpg}\cite{sssegmentationc}
         \end{center}
         After the segmentation a grouping of regions is done by similarity. After each grouping a similarity between
-        resulting regions and its neighbors are being calculated. This process is done until the whole image becomes a single region.
-        \cite{selectivesearch}
+        resulting regions and its neighbors are being calculated. This process is done until the whole image becomes a single region.\cite{selectivesearch}
         \begin{center}
             \includegraphics[width=0.5\textwidth]{images/breakfast-top-200-proposals.jpg}\cite{sssegmentationbb}
         \end{center}
@@ -184,13 +183,40 @@ A selective search algorithm is subjected into 3 design ideas:
         spaces which have different invariance properties.
     \item Fast to Compute \\ \\
         The fast computation is being achieved by four complementary similarity measures. All these measures are in range of [0, 1] which
-        facilitates combinations of these measures.
+        facilitates combinations of these measures. \cite{selectivesearch}
         \begin{itemize}
             \item \large{S}\emph{color} \\ \\
-                Measures color similarity specifically for each region where a color histogram with 25 bins is being created. \\
-            \item \large{S}\emph{texture} \\ \\
+                Measures color similarity specifically for each region where a color histogram of 25 bins is being created and normalized
+                with the L1 norm. Similarity is measured using the histogram intersection: \cite{selectivesearch} \\
+                \begin{center}
+                    \begin{equation*}
+                        S_{color}(r_i,r_j) = \sum_{n=1}^{n} min(c_i^{k},c_j^{k})
+                    \end{equation*}\cite{selectivesearch}
+                \end{center}
+                \newpage
+                \noindent
+                The histogram can be efficienlty propagated through the hierarchy by: \\
+                \begin{center}
+                    \begin{equation*}
+                        \begin{split}
+                            C_t & = \frac{size(r_j)*C_i+size(r_j)*C_j}{size(r_i)+size(r_j)}
+                        \end{split}
+                    \end{equation*}\cite{selectivesearch}
+                \end{center}
 
-            \item \large{S}\emph{size}
+            \item \large{S}\emph{texture} \\ \\
+                Selective Search measures texture similarity through the usage of the SIFT algorithm. SIFT stands for scale invariant
+                feature transform and is a algorithm to detect and describe features in a region. Further more it takes Gaussian derivatives
+                in eight orientations for each color channel, where a 10 bin histogram is being extracted. Similarity is being measured
+                again using the histogram intersections and the propagation is function is the same as for the color. \cite{selectivesearch}
+                \begin{center}
+                    \begin{equation*}
+                        S_{texture}(r_i,r_j) = \sum_{n=1}^{n} min(t_i^{k},t_j^{k})
+                    \end{equation*}\cite{selectivesearch}
+                \end{center}
+
+            \item \large{S}\emph{size} \\ \\
+
             \item \large{S}\emph{fill}
         \end{itemize}
 \end{itemize}
