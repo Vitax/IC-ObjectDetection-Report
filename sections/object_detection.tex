@@ -138,21 +138,20 @@ detection system which is still reliable and accurate when doing so. \\
 There are multiple algorithms covering various forms of this formula, called RCNN, F-RCNN, SSD, YOLO but first we will cover the approach of
 detecting interesting regions in an image because this is a key problem in object detection.
 
-\subsection{Approaches to Object Localization}
-The segmentation of an image is the key approach to Object Localization, since images are always hierarchical the segmentation as well has
-to be hierarchical. It has to be able to cover different criteria and forms, where maybe objects are part of a bigger total or just single
-parts inside another one. Since is not feasible to compute every possibility inside an image there has to be some kind of separation
-through grids and scales. \\
-As there are many approaches to algorithms how to analyze and classify regions, there are many approaches for algorithms to detect
-interesting sections of an image which may contain objects.
+\subsection{Object Localization \& Classification}
+The segmentation of an image is the key approach to Object Localization and at the same time for Object Classification. Since images are always hierarchical the segmentation as well has
+to be hierarchical. It has to be able to cover different criteria and forms, where maybe objects are part of a bigger total or just  smaller
+objects which are inside one another. Since is not feasible to compute every possibility inside an image there has to be some kind of
+separation through grids and scales. \\
+As there are many approaches to algorithms as how to analyze and classify regions I am going to cover three localization algorithms.
 
 \subsubsection{Exhaustive Search}
-Since an object can be located anywhere in an image the scope to look for it is enormous making the computational cost for such search very
+Since an object can be located anywhere in an image the scope to look through is enormous. Making the computational cost for such a search very
 expensive. To compensate for this cost most exhaustive search approaches such as the sliding window approach, constraint the size and aspect
 ratio of the window over the grid, also using weak classifiers and economic image features such as histogram of oriented gradients
 (HOG).\cite{selectivesearch} \\
-HOG approaches the problem of recognizing and detecting objects in an unknown image through detecting corners. It analyzes the distribution and their
-orientation through which he is able to separate the image in multiple partitions or detect similar regions in different images.
+HOG approaches the problem of recognizing and detecting objects in an unknown image through corners. It analyzes the distribution and their
+orientation, through which he is able to separate the image in multiple partitions or detect similar regions in different images.
 Robert K. McConnell described the concept in a patent in 1986 but it became known in 2005 through a publication of Navneet Dalal and Bill
 Triggs.\cite{wiki_hog}
 \vspace{0.5cm}
@@ -161,7 +160,7 @@ Triggs.\cite{wiki_hog}
 \end{center}
 
 \subsubsection{Selective Search}
-A selective search algorithm is subjected into 3 design ideas:
+A selective search algorithm is subjected into 3 design ideas:\\ \\
 \begin{itemize}
     \item Capture All Scales \\ \\
         The idea is similar to the one of the Exhaustive Search that all objects have to be found. Therefore all scales have to be
@@ -182,47 +181,93 @@ A selective search algorithm is subjected into 3 design ideas:
         conditions. To account for these variances selective search is performing the hierarchical grouping algorithm with different color
         spaces which have different invariance properties.
     \item Fast to Compute \\ \\
-        The fast computation is being achieved by four complementary similarity measures. All these measures are in range of [0, 1] which
-        facilitates combinations of these measures. \cite{selectivesearch}
-        \begin{itemize}
-            \item \large{S}\emph{color} \\ \\
-                Measures color similarity specifically for each region where a color histogram of 25 bins is being created and normalized
-                with the L1 norm. Similarity is measured using the histogram intersection: \cite{selectivesearch} \\
-                \begin{center}
-                    \begin{equation*}
-                        S_{color}(r_i,r_j) = \sum_{n=1}^{n} min(c_i^{k},c_j^{k})
-                    \end{equation*}\cite{selectivesearch}
-                \end{center}
-                \newpage
-                \noindent
-                The histogram can be efficienlty propagated through the hierarchy by: \\
-                \begin{center}
-                    \begin{equation*}
-                        \begin{split}
-                            C_t & = \frac{size(r_j)*C_i+size(r_j)*C_j}{size(r_i)+size(r_j)}
-                        \end{split}
-                    \end{equation*}\cite{selectivesearch}
-                \end{center}
-
-            \item \large{S}\emph{texture} \\ \\
-                Selective Search measures texture similarity through the usage of the SIFT algorithm. SIFT stands for scale invariant
-                feature transform and is a algorithm to detect and describe features in a region. Further more it takes Gaussian derivatives
-                in eight orientations for each color channel, where a 10 bin histogram is being extracted. Similarity is being measured
-                again using the histogram intersections and the propagation is function is the same as for the color. \cite{selectivesearch}
-                \begin{center}
-                    \begin{equation*}
-                        S_{texture}(r_i,r_j) = \sum_{n=1}^{n} min(t_i^{k},t_j^{k})
-                    \end{equation*}\cite{selectivesearch}
-                \end{center}
-
-            \item \large{S}\emph{size} \\ \\
-
-            \item \large{S}\emph{fill}
-        \end{itemize}
+        Since this step is a computation step, the main goal of this algorithm is to be fast and not create a bottleneck through is
+        complexity. \cite{selectivesearch}
 \end{itemize}
+\large{S}\emph{color}: \\ \\
+Measures color similarity specifically for each region where a color histogram of 25 bins is being created and normalized
+with the L1 norm. Similarity is measured using the histogram intersection: \cite{selectivesearch} \\
+\begin{center}
+    \begin{equation*}
+        S_{color}(r_i,r_j) = \sum_{n=1}^{n} min(c_i^{k},c_j^{k})
+    \end{equation*}\cite{selectivesearch}
+\end{center}
+\newpage
+\noindent
+The histogram can be efficienlty propagated through the hierarchy by: \\
+\begin{center}
+    \begin{equation*}
+        \begin{split}
+            C_t & = \frac{size(r_j)*C_i+size(r_j)*C_j}{size(r_i)+size(r_j)}
+        \end{split}
+    \end{equation*}\cite{selectivesearch}
+\end{center}
+\large{S}\emph{texture}: \\ \\
+Selective Search measures texture similarity through the usage of the SIFT algorithm. SIFT stands for scale invariant
+feature transform and is a algorithm to detect and describe features in a region. Further more it takes Gaussian derivatives
+in eight orientations for each color channel, where a 10 bin histogram is being extracted. Similarity is being measured
+again using the histogram intersections and the propagation is function is the same as for the color.\cite{selectivesearch}
+\begin{center}
+    \begin{equation*}
+        S_{texture}(r_i,r_j) = \sum_{n=1}^{n} min(t_i^{k},t_j^{k})
+    \end{equation*}\cite{selectivesearch}
+\end{center}
+\large{S}\emph{size}: \\ \\
+With this step selective search encourages to merge small regions early. By doing so it forces the algorithm to focus
+on smaller regions which have not been merged yet first. This is encouraged because it hinders the algorithm from one
+region gobbling up the rest of them one by one.\cite{selectivesearch}
+\begin{center}
+    \begin{equation*}
+        \begin{split}
+            S_{size}(r_i,r_j) & = 1 - \frac{size(r_i)+size(r_j)}{size(image)}
+        \end{split}
+    \end{equation*}\cite{selectivesearch}
+\end{center}
+\large{S}\emph{fill}: \\ \\
+Measures how well region r$_i$ and r$_j$ fit into each other. The idea is to fill gaps if r{$_i$} is contained in
+r$_j$, therefore it is only logical that these regions should be merged first in order to avoid holes. On the other hand
+if r$_i$ and r$_j$ hardly touch each other it may form a strange region and therefore should not be merged. To keep
+the process fast only the size of the regions and their contained bounding boxes are being used. Specifically the defined
+BB$_{ij}$ has to be a tight bounding box around r$_i$ and r$_j$. Now S$_{fill}$ is the fraction of the image
+contained in BB$_{ij}$ which is not by the regions of r$_i$ and r$_j$.\cite{selectivesearch}
+\begin{center}
+    \begin{equation*}
+        \begin{split}
+            fill(r_i, r_j) = 1 - \frac{size(BB_{ij}) - size(r_i) - size(r_j)}{size(image)}
+        \end{split}
+    \end{equation*}\cite{selectivesearch}
+\end{center}
+The final formula which measures the similarity is a combination of the above 4:
+\begin{center}
+    \begin{equation*}
+        s(r_i,r_j) = a1s_{coulor}(r_i,r_j) + a2s_{texture}(r_i,r_j) + a3s_{size}(r_i,r_j) + a4s_{fill}(r_i,r_j)
+    \end{equation*}\cite{selectivesearch}
+\end{center}
 
-\subsubsection{Region Proposal Network}
-
-\subsection{Approaches to Object Classification}
+\subsubsection{Region Proposal Network in Faster R-CNN}
+A Region Proposal Network (RPN) takes an image of any size as an input and outputs a set of rectangular object proposals, each with an
+objectness score. After the initial proposals, a sliding window is being run over the feature map. The sliding
+window is of size n x n. In this example it will be of size 3 x 3. So for each sliding window a set of 9 anchors are being generated, 3
+scales and 3 aspect ratios.\cite{fasterrcnn}
+\begin{center}
+    \includegraphics[scale=0.5]{images/rpn_anchors.png}
+\end{center}
+Furthermore for each sliding window anchor a value called Intersection of Union short IoU is being calculated. IoU represents the value of how
+much the predicted bounding box overlaps with the ground truth. The ground truth is the basis for teaching the localization network and is a
+set of data predefined by a person telling the network where, which objects are in the image. \\
+The general idea of IoU is:\cite{fasterrcnn}
+\begin{center}
+    \begin{equation*}
+        p =
+        \begin{cases} 
+            1 & \text{if IoU} > threshold \\
+            -1 & \text{if IoU} < threshold \\
+            0 & otherwise
+        \end{cases}
+    \end{equation*}
+\end{center}
+In the final step the results of the spatial sliding window is being fed into a smaller network which has two tasks. Classification (cls)
+and regression (reg). The output of the regression represents a bounding box with (x, y, w, h) on the other hand the cls value is a
+probability indicating whether the bounding box contains a object or not.\cite{fasterrcnn}
 
 \end{document}     

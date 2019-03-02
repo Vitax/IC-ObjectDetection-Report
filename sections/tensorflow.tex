@@ -1,2 +1,29 @@
+% Write about tensorflow 
+    %   - short background on tensorflow
+    %   - ways of training/ new architecture (code or config), new model existing layout , transfer learning
+    %   - setup for training (cpu, gpu, cuda, cudnn)
+    %   - short background on cuda and cudnn
+    %   - training a model
+    %   - analysis of model
 \begin{document}
+TensorFlow™ is an open source software library for high performance numerical computation. Its flexible architecture allows easy deployment
+of computation across a variety of platforms (CPUs, GPUs, TPUs), and from desktops to clusters of servers to mobile and edge devices.
+Originally developed by researchers and engineers from the Google Brain team within Google’s AI organization, it comes with strong support
+for machine learning and deep learning and the flexible numerical computation core is used across many other scientific
+domains.\cite{tensorflow}
+
+\section{Writing Object Detection Models with Tensorflow}
+Tensorflow is a full fledged machine learning framework which support the programming languages C++, Python. It is multi purpose framework
+which can be used for training Neural Networks for Image Recognition, Object Detection or other purposes. Furthermore tensorflow uses
+Keras which is a high level API for building and training deep learning models. For Object Detection for which I am using Tensorflow in this
+report, you are able to write a Object Detection Neural Network in multiple ways.
+\begin{itemize}
+    \item Do it Yourself \\ \\
+        You are able to write your object detection model from scratch, starting at how features are being extracted processed and
+        evaluated to how layers of your neural networks are connected, communicate and how the logic for the object localization and object
+        classification is being used and implemented.
+    \item Just write the Model \\
+        Tensorflows object detection model which they provide with \url{https://github.com/tensorflow/models}. You are able to compose new
+        ideas for models with .config files. These just contain the setup of the neural network model.
+\end{itemize}
 \end{document}
