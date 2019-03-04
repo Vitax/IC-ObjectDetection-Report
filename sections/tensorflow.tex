@@ -12,18 +12,54 @@ Originally developed by researchers and engineers from the Google Brain team wit
 for machine learning and deep learning and the flexible numerical computation core is used across many other scientific
 domains.\cite{tensorflow}
 
-\section{Writing Object Detection Models with Tensorflow}
+\section{Writing Object Detection Models with Tensorflow} \label{train with tensorflow}
 Tensorflow is a full fledged machine learning framework which support the programming languages C++, Python. It is multi purpose framework
 which can be used for training Neural Networks for Image Recognition, Object Detection or other purposes. Furthermore tensorflow uses
 Keras which is a high level API for building and training deep learning models. For Object Detection for which I am using Tensorflow in this
 report, you are able to write a Object Detection Neural Network in multiple ways.
 \begin{itemize}
     \item Do it Yourself \\ \\
-        You are able to write your object detection model from scratch, starting at how features are being extracted processed and
-        evaluated to how layers of your neural networks are connected, communicate and how the logic for the object localization and object
+        You are able to write your object detection logic from scratch, starting at how features are being extracted processed and
+        evaluated to how layers of your neural networks are connected, sequenced, communicate and how the object localization and object
         classification is being used and implemented.
-    \item Just write the Model \\
-        Tensorflows object detection model which they provide with \url{https://github.com/tensorflow/models}. You are able to compose new
-        ideas for models with .config files. These just contain the setup of the neural network model.
+    \item Just write the Model \\ \\
+        Tensorflows object detection model which they provide at \url{https://github.com/tensorflow/models} is a simple yet effective way of
+        training Object Detection Neural Netowrks. You are able to compose new ideas for models with simple '.config' files without going
+        too deep into the code and logic of tensorflow. These config files contain the setup of the neural network model. For instance in
+        which sequence the layers are going to be, what the IoU value has to be for a bounding box to be valid and which features have to
+        bextracted by the tensorflow api. See appendix \ref{tfconfig} for a full '.config' file used for training.
 \end{itemize}
+
+\section{Training Models with Tensorflow} \label{models with tensorflow}
+As there are multiple ways of setting up your neural network there are also a couple of ways training it. It start with the choice of your
+dataset, it can bias orientated meaning that it will recognize one type of image very good but fail on others, in machine learning terms it
+overfitts. Or it can be 
+\begin{itemize}
+    \item Train from Scratch \\ \\
+        Which ever way you are training your model, starting from scratch without a basis will require: \\
+        {- alot of resources (images, ground truth data)} \\
+        {- alot of training time} \\
+    \item Train by transfer Learning \\ \\
+        When you are doing transfer learning, you are taking an already trained model and build ontop of it with your own image set.\\
+        This results in: \\
+        {- far fewer images need} \\
+        {- less training time (comparing days and weeks to hours and minutes)} \\
+\end{itemize}
+Training is pretty straight forward when using the setup from tensorflow as mentioned in \ref{train with tensorflow} "Just write the Model".
+For this you have to install Tensorflow and all the required dependencies they can be found here
+\url{https://www.tensorflow.org/install/pip}. \\ \\
+After setting up the environment my first attempt was getting the data myself, labeling them with the Open Source software
+\href{https://github.com/tzutalin/labelImg}{LabelImg} and training a new Model through a tensorflow config. This was a tedious effort and
+resulted in a bad model which detected images pretty well as long as it was from the train set. This was done with various combinations of
+data volume, IoU variation and feature tweaks provided through Tensorflow without much difference in its performance.  After this I switched
+to transfer learning since I found the amount of data and time required to train a new model properly not worth. \\ 
+After this I downloaded images and bounding box data through the api of ms coco which is a dataset providing more then 2.5 million labeled
+instances in 328k images.\cite{mscoco} There are other datasets such as Pascal VOC and ImageNet but none of them provided a easy way to
+download data similar to MSCOCO. I downloaded 9 Classes with 2k images and labels each to test and vary the amount of data provided to the
+training process.
+
+\section{Training results}
+
+
+
 \end{document}

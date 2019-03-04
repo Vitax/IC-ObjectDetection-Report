@@ -5,15 +5,14 @@
 \usepackage[utf8]{inputenc}
 \usepackage[pdftex]{hyperref}
 
+\usepackage{listings}
 \usepackage{pgfplots}
 \usepackage{tikz}
 \usepackage{cite}
 \usepackage{url}
-
 \usepackage{titlesec}
 \usepackage{amsmath}
 \usepackage{graphicx}
-
 \usepackage{subfiles}
 \usepackage{blindtext}
 
@@ -21,6 +20,14 @@
 \titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
 
 \graphicspath{{images}{../images}}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
 
 \begin{document}
 
@@ -45,10 +52,12 @@
         \vfill
     \end{titlepage}
 
+    \pagenumbering{gobble}
     \tableofcontents
 
     \newpage
 
+    \pagenumbering{arabic}
     \chapter{Abstract}
     \subfile{sections/abstract.tex}
 
@@ -87,8 +96,12 @@
     \subfile{sections/conclusion.tex}
 
     \newpage
+    \pagenumbering{gobble}
 
     \bibliographystyle{unsrt}
     \bibliography{references}
+
+    \chapter{Appendix}
+    \subfile{sections/appendix.tex}
 
 \end{document}
