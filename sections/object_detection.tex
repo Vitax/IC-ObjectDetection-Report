@@ -1,5 +1,5 @@
 \begin{document}
-\section{Brief introduction to Neurons and Networks}
+\section{Introduction to Neurons and Networks}
 Similar to the neurons in the human brain, neurons in computer science are approaching the same concept and same ideology.\\
 The functionality of a neuron is to retrieve data, possibly and ideally multiple at the same time, process and output a single result. There
 are many types of neurons, for introduction purposes I am just gonna mention two here.
@@ -11,9 +11,10 @@ The more commonly used artificial neuron in Neural Network models is the Sigmoid
 belowe.
 
 \subsection{Percpetrons}
-Perceptrons were developed in 1950 to 1960 by the scientist Frank Rosenblatt, inspired by earlier works from Waren McCulloch and Walter Pitts.
+Perceptrons were developed in 1950 to 1960 by the scientist Frank Rosenblatt, inspired by earlier works from Waren McCulloch and Walter
+Pitts. \cite{neuralnetworksanddeeplearning}
 \begin{center}
-    \includegraphics[scale=0.5]{images/simple_neuron.png}
+    \includegraphics[scale=0.5]{images/neurons/simple_neuron.png}
 \end{center}
 In this example our neuron has 2 input variables and one output, in theory it can have more or less. Further more Frank Rosenblatt proposes
 the concept of weights for each input variable defining how important a variable is compared to another.\\
@@ -26,11 +27,11 @@ the concept of weights for each input variable defining how important a variable
         \end{cases}
     \end{equation*}
 \vspace{0.5cm}
-A single neuron is by no means comparable to a decision making possibilities of a human being, but it can weigh variables and make decisions
+A single neuron is by no means comparable to a decision making of a human being, but it can weigh variables and make decisions
 accordingly by defining a threshold for when a true or false gets output. Another way to create a conditional behavior is to use a bias
 instead of a threshold.
 \begin{center}
-    \includegraphics[scale=0.5]{images/simple_neuron_bias.png}
+    \includegraphics[scale=0.5]{images/neurons/simple_neuron_bias.png}
 \end{center}
 \vspace{0.5cm}
     \begin{equation*}
@@ -43,7 +44,7 @@ instead of a threshold.
 \vspace{0.5cm} \\
 Making it obvious that they are able to perform more complex decisions in layers.
 \begin{center}
-    \includegraphics[scale=0.5]{images/neural_network.png}
+    \includegraphics[scale=0.5]{images/neurons/neural_network.png}
 \end{center}
 \newpage
 \noindent
@@ -57,11 +58,11 @@ thats where sigmoids come in handy and build on top of the concept of perceptron
 The core principle of a sigmoid neuron is the same as the perceptrons. Just like perceptrons, sigmoids have input and output variables but
 instead of just being 0 or 1 it can be anything in between 0 and 1 so 0.5234 is a valid output of a sigmoid.
 \begin{center}
-    \includegraphics[scale=0.5]{images/simple_neuron.png}
+    \includegraphics[scale=0.5]{images/neurons/simple_neuron.png}
 \end{center}
 It can also have weights and biases similiar to the perceptron:
 \begin{center}
-    \includegraphics[scale=0.5]{images/simple_neuron_bias.png}
+    \includegraphics[scale=0.5]{images/neurons/simple_neuron_bias.png}
 \end{center}
 The arithmetic function on the other looks different and is called the sigmoid function or sometimes the logistic function.
 \vspace{0.5cm}
@@ -148,7 +149,7 @@ As there are many approaches to algorithms as how to analyze and classify region
 \subsubsection{Exhaustive Search}
 Since an object can be located anywhere in an image the scope to look through is enormous. Making the computational cost for such a search very
 expensive. To compensate for this cost most exhaustive search approaches such as the sliding window approach, constraint the size and aspect
-ratio of the window over the grid, also using weak classifiers and economic image features such as histogram of oriented gradients
+ratio of the window over the grid, using weak classifiers and economic image features such as histogram of oriented gradients
 (HOG).\cite{selectivesearch} \\
 HOG approaches the problem of recognizing and detecting objects in an unknown image through corners. It analyzes the distribution and their
 orientation, through which he is able to separate the image in multiple partitions or detect similar regions in different images.
@@ -156,7 +157,7 @@ Robert K. McConnell described the concept in a patent in 1986 but it became know
 Triggs.\cite{wiki_hog}
 \vspace{0.5cm}
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{images/Dlib_Learned-HOG-Detector.jpg} \cite{wiki_hog}
+    \includegraphics[width=0.5\textwidth]{images/object_detection/Dlib_Learned-HOG-Detector.jpg} \cite{wiki_hog}
 \end{center}
 
 \subsubsection{Selective Search}
@@ -167,12 +168,12 @@ A selective search algorithm is subjected into 3 design ideas:\\ \\
         considered as a potential region. The best approach is a hierarchical grouping, where a initial sub segmentation has to
         be performed. \cite{selectivesearch}
         \begin{center}
-            \includegraphics[width=0.5\textwidth]{images/breakfast_fnh.jpg}\cite{sssegmentationc}
+            \includegraphics[width=0.5\textwidth]{images/object_detection/breakfast_fnh.jpg}\cite{sssegmentationc}
         \end{center}
         After the segmentation a grouping of regions is done by similarity. After each grouping a similarity between
         resulting regions and its neighbors are being calculated. This process is done until the whole image becomes a single region.\cite{selectivesearch}
         \begin{center}
-            \includegraphics[width=0.5\textwidth]{images/breakfast-top-200-proposals.jpg}\cite{sssegmentationbb}
+            \includegraphics[width=0.5\textwidth]{images/object_detection/breakfast-top-200-proposals.jpg}\cite{sssegmentationbb}
         \end{center}
     \item Diversification \\ \\
         There is no single strategy for grouping regions together therefore multiple aspects have to be considered. Selective search
@@ -250,7 +251,7 @@ objectness score. After the initial proposals, a sliding window is being run ove
 window is of size n x n. In this example it will be of size 3 x 3. So for each sliding window a set of 9 anchors are being generated, 3
 scales and 3 aspect ratios.\cite{fasterrcnn}
 \begin{center}
-    \includegraphics[scale=0.5]{images/rpn_anchors.png}
+    \includegraphics[scale=0.5]{images/object_detection/rpn_anchors.png}
 \end{center}
 Furthermore for each sliding window anchor a value called Intersection of Union short IoU is being calculated. IoU represents the value of how
 much the predicted bounding box overlaps with the ground truth. The ground truth is the basis for teaching the localization network and is a
@@ -269,5 +270,10 @@ The general idea of IoU is:\cite{fasterrcnn}
 In the final step the results of the spatial sliding window is being fed into a smaller network which has two tasks. Classification (cls)
 and regression (reg). The output of the regression represents a bounding box with (x, y, w, h) on the other hand the cls value is a
 probability indicating whether the bounding box contains a object or not.\cite{fasterrcnn}
+
+\subsubsection{Single Shot Detector(SSD)}
+Compared to the Faster R-CNN where the detection happens in two stages. Firstly having the region proposal network generating proposals and
+the second one then classifying them. SSD is a single feed forwards convolutional network to directly predict classes and anchor offsets
+without requiring a second stage per-proposal.
 
 \end{document}     
