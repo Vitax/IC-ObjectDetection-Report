@@ -1,17 +1,19 @@
 \begin{document}
 
-The initial phase to create the Application was having a basic script which instantiates a Tensorflow model, processes the image to
-Tensorflow standards and passes it into the Model for object detection. Using this script as a basis I started developing a application with
-PyQt version 5. PyQt is a cross-platform GUI toolkit which is similar to Java Swift and is a easy library to develop a UI with, it takes
-ideas and concepts from different roots and implements a layer based architecture for elements. \\ \\
+The initial phase of creating the Application was to have a basic script which instantiates a Tensorflow model, processed the image to
+Tensorflow standards and passed it on to the Model for object detection. Using this script as a basis which performed the object detection
+on images,videos and web camera streams I started developing a application in Python with PyQt Version 5.\\
+PyQt is a cross-platform GUI toolkit which is similar to Java Swift and is a easy library to develop a UI with, it takes ideas and concepts
+from different roots and implements a layer based architecture for elements.
 \begin{center}
     \includegraphics[width=0.75\textwidth]{images/application/Application.png}
 \end{center}
 There were several requirements for the Application from the start:
 \begin{itemize}
     \item Use any model trained with Tensorflow \\ \\
-        Since I am using the Tensorflos API for my application this point is being handled by Tensorflow itself.\\
-    \item Change used model, label map and class number on runtime \\
+        Since I am using the Tensorflos API for my application this point is being handled by Tensorflow itself
+    \newpage \noindent
+    \item Change used model, label map and class number on runtime \\ \\
         For this I implemented a config class where I will store the path's of the selected inference graph, the label map and the
         number of classes set by the User. These if existent will be queried for on startup and with them a Tensorflow model will be instantiated.\\
         \begin{center}

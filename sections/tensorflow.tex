@@ -36,22 +36,38 @@ As there are multiple ways of setting up your object detection system, if you ar
 are also a couple of ways training the model.
 \begin{itemize}
     \item Train from Scratch \\ \\
-        Which ever way you are training your model, starting from scratch without a basis will require: \\
+        Which ever way you are training your model either through a configuration file or through a whole new system, starting from scratch
+        without a basis will require: \\
         {- a lot of resources (images, ground truth data)} \\
         {- a lot of training time} \\
     \item Train by transfer Learning \\ \\
-        When you are doing transfer learning, you are taking an already trained model and build on top of it with your own image set.\\
+        When you are doing transfer learning, you are taking an already trained model and build on top of it, using your own image set.\\
         This results in: \\
         {- far fewer images needed} \\
         {- less training time (comparing days and weeks to hours and minutes)} \\
 \end{itemize}
-Training is pretty straight forward when using the setup from Tensorflow as mentioned in\ref{train-with-tensorflow} "Just write the Model".
-For this you have to install Tensorflow and all the required dependencies. They can be found here:
-\url{https://www.tensorflow.org/install/pip}. Further more some custom scripts were written to enable converting text files to ''.csv''
-files, create   Further more some custom scripts were written to enable converting text files to ''.csv''
-files to enable the generation of .record files and to merge entries of multiple files with the same naming (there were multiple files with
-the same name and content but labeled differently for each category). Lastly environmental variables, proto
-files and '.record' files had to be setup and compiled for Tensorflow.
+Training a model with the setup from Tensorflow as mentioned in\ref{train-with-tensorflow} "Just write the Model" is pretty straight forward.
+You have to install Tensorflow and all the required dependencies which can be found here, \url{https://www.tensorflow.org/install/pip}.
+Further more some custom scripts were required to enable converting text files to ''.csv'', create ''.record'', merge label files from
+MSCOCO and test the object detection models without an application. Lastly environmental variables, proto files and '.record' files had to
+be setup and compiled for Tensorflow.
+\newpage \noindent
+\section{Training results}
+After setting up the environment my first attempt was getting the data myself, labeling them with the Open Source software
+\href{https://github.com/tzutalin/labelImg}{LabelImg} and training a new Model through a Tensorflow configuration. This was a tedious effort and
+resulted in a bad model which detected images pretty well as long as they were from the evaluation and test set but failed on real world
+data. To test results this procedure was performed in various combinations such as data quantities, IoU, variable and extraction feature
+tweaks provided through Tensorflow's model, without much difference in its performance. To note is that these were my first attempts
+training models with Tensorflow and I did not understand the whole procedure too well, meaning I didn't consult Tensorboard which is User
+Interface from Tensorflow to view the results of my Data and Model.\\ \\
+After this I switched to transfer learning which takes the weights and knowledge of a already
+\href{https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md}{existing model} and applies it to a different one with related problems. 
+I downloaded images and bounding box data through the API of MSCOCO which is a dataset providing more then 2.5 million label
+instances in 328 thousand images.\cite{mscoco} There are other datasets such as Pascal VOC and ImageNet but none of them provided a easy way to
+download data similar to MSCOCO. For the following models I downloaded 9 Classes with one thousand images and labels each to test, vary and experiment
+with the amount of data provided to training my model.\\\\
+Secondly I downloaded the models from Tensorflow, one was the faster-rcnn-inception-v2-coco and the ssd-mobilnet-v2-coco trained with the
+dataset from MSCOCO. These are 2 models where the first one is implemented with the Faster-RCNN and the later with SSD algorithm. \\
 \begin{center}
     \begin{tabular}{|c|c|c|c|c|}
         \hline
@@ -60,26 +76,10 @@ files and '.record' files had to be setup and compiled for Tensorflow.
         ssd-mobilenet-v2-coco & 32 & 22 \\ \hline
     \end{tabular}
 \end{center}
-\section{Training results}
-After setting up the environment my first attempt was getting the data myself, labeling them with the Open Source software
-\href{https://github.com/tzutalin/labelImg}{LabelImg} and training a new Model through a Tensorflow configuration. This was a tedious effort and
-resulted in a bad model which detected images pretty well as long as they were from the train set or similar but failed on real world data.
-This was done with various combinations of data quantities which was not enough at all for this, IoU, variable and feature tweaks provided
-through Tensorflow without much difference in its performance. To note is that these were my first attempts training models with Tensorflow
-and I did not understand the whole procedure too well, meaning I didn't consult Tensorboard which is User Interface from Tensorflow to view
-the results of my Data and Model. \\ 
-After this I switched to transfer learning which takes the weights and knowledge of a already
-\href{https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md}{existing models} from
-Tensorflow and applies it to a different one with related problems. \\ 
-Firstly I downloaded images and bounding box data through the API of ms coco which is a dataset providing more then 2.5 million label
-instances in 328 thousand images.\cite{mscoco} There are other datasets such as Pascal VOC and ImageNet but none of them provided a easy way to
-download data similar to MSCOCO. For the following models I downloaded 9 Classes with one thousand images and labels each to test, vary and experiment
-with the amount of data provided to training my model. \\
-Secondly I downloaded two models from Tensorflow, one was the faster-rcnn-inception-v2-coco and the ssd-mobilnet-v2-coco trained with the
-dataset from MSCOCO. These are 2 models where the first one is implemented with the Faster-RCNN and the later with SSD algorithm. \\
+\newpage \noindent
 When transfer learning I noticed that 200 images for each category was more then enough to get decent results, the results degraded compared
 to the original Tensorflow models I used for transfer learning but it was still better then the initial attempts of training. The following
-graphs are smoothed by a factor of 0.6. \\ \\
+graphs are smoothed by a factor of 0.6 and showcase the performance of one of my models.
 \begin{figure}[hbt!]
     \begin{center}
         \caption{mAP}
