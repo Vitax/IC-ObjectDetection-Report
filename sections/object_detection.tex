@@ -1,72 +1,103 @@
 \begin{document}
 \section{Introduction to Neurons and Networks}
-Similar to the neurons in the human brain, neurons in computer science are approaching the same concept and same ideology.\\
+Similar to the neurons in the human brain, neurons in computer science are approaching the same concept and ideology.\\
 The way a neuron functions is to retrieve data, possibly and ideally multiple at the same time, process and output a single result. There
-are many types of neurons, for the purpose of this report I am just gonna explain two of them:
+are many types of subsets for neurons, for the purpose of this report I will explain the two most common ones:
 \begin{itemize}
     \item Perceptrons
     \item Sigmoids
 \end{itemize}
-The more commonly used artificial neuron in Machine Learning is the Sigmoid. The reasons for that will be mentioned in the chapters
-below.
 
 \subsection{Percpetrons}
-Perceptrons were developed in 1950 to 1960 by the scientist Frank Rosenblatt, inspired by earlier works from Waren McCulloch and Walter
+Perceptrons were developed in 1957 by the scientist Frank Rosenblatt, inspired by earlier works from Waren McCulloch and Walter
 Pitts.\cite{neuralnetworksanddeeplearning}
-\begin{center}
-    \includegraphics[width=0.25\textwidth]{images/neurons/simple_neuron.png}
-\end{center}
-In this example our neuron has 2 input variables and one output, in theory it can have more or less. Further more Frank Rosenblatt proposes
-the concept of weights for each input variable defining how important a variable is compared to another.\\
-\begin{equation*}
-    output=
-    \begin{cases}
-        0 \text{ if } \sum{_j}{w_jx_j \le threshold}\\
-        1 \text{ if } \sum{_j}{w_jx_j > threshold}
-    \end{cases}
-\end{equation*}
+\vspace{0.25cm}
+\begin{figure}[hbt!]
+    \caption{Simple neuron}
+    \begin{center}
+        \includegraphics[width=0.25\textwidth]{images/neurons/simple_neuron.png}
+    \end{center}
+    \label{fig:simple-neuron}
+\end{figure}
+\vspace{0.25cm}
+In this example our neuron \ref{fig:simple-neuron} has 2 input variables and one output, in theory it can have more or less. Furthermore Frank Rosenblatt proposes
+the concept of weights for each input variable saying which variable is preferred over another one.
+\vspace{0.25cm}
+\begin{figure}[hbt!]
+    \caption{Activation function of a perceptron}
+    \begin{equation*}
+        output=
+        \begin{cases}
+            0 \text{ if } \sum{_j}{w_jx_j \le threshold}\\
+            1 \text{ if } \sum{_j}{w_jx_j > threshold}
+        \end{cases}
+    \end{equation*}
+\end{figure}
 \newpage \noindent
 A single neuron is by no means comparable to a decision making of a human being, but it can weigh variables and make decisions
-accordingly by defining a threshold for when a true or false should be evaluated. Another way to create a conditional behavior is to use a bias
+by defining a threshold when a true or false should be evaluated. Another way to create a conditional behavior is to use a bias
 instead of a threshold.
-\begin{center}
-    \includegraphics[width=0.25\textwidth]{images/neurons/simple_neuron_bias.png}
-\end{center}
-\begin{equation*}
-    output=
-    \begin{cases}
-        0 \text{ if } \sum{_j}{w_jx_j+b \le 0}\\
-        1 \text{ if } \sum{_j}{w_jx_j+b > 0}
-    \end{cases}
-\end{equation*}
+\vspace{0.25cm}
+\begin{figure}[hbt!]
+    \caption{Neuron with bias}
+    \begin{center}
+        \includegraphics[width=0.25\textwidth]{images/neurons/simple_neuron_bias.png}
+    \end{center} 
+\end{figure}
+\vspace{0.25cm}
+\begin{figure}[hbt!]
+    \caption{Activation function with bias}
+    \begin{equation*}
+        output=
+        \begin{cases}
+            0 \text{ if } \sum{_j}{w_jx_j+b \le 0}\\
+            1 \text{ if } \sum{_j}{w_jx_j+b > 0}
+        \end{cases}
+    \end{equation*}
+\end{figure}
+\vspace{0.25cm}
 A whole network of these neurons is able to perform more complex decision making. The network below is a feed forward network, but there are
-bidirectional and even forms where the neuron passes its output back to itself as an input.
-\begin{center}
-    \includegraphics[width=0.5\textwidth]{images/neurons/neural_network.png}
-\end{center}
+bidirectional networks and even forms where the neuron passes its output back to itself. 
+\vspace{0.25cm}
+\begin{figure}[hbt!]
+    \caption{Example neural network}
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{images/neurons/neural_network.png}
+    \end{center}
+    \label{fig:neural-network}
+\end{figure}
 \newpage \noindent
-The columns in this network are called layers, the first column is refered to as the first layers and the last one as the output one all the
+The columns in the network \ref{fig:neural-network} are called layers. The first column is referred to as the input layer and the last one as the output. All the
 ones in between are called hidden layers. \\
-Since the result of a perceptron can only be one or zero (true or false), one major problem someone faces when using perceptrons in more
+Since the result of a perceptron can only be one or zero (true or false), one major problem which occurs when using perceptrons in more
 complex neural networks is that biases and weights can have weird and unwanted effects. Making perceptrons trigger where they should not.
 Thats why sigmoids were invented and they build on top of the concept of perceptrons.
 
 \subsection{Sigmoids}
-The core principle of a sigmoid neuron is the same as the perceptrons. Just like perceptrons, sigmoids have input and output variables but
-instead of just being 0 or 1 it can be anything in between 0 and 1 so 0.5234 is a valid output of a sigmoid. Likewise it can have weights and
-biases functioning the same as it does for the perceptrons.
-The core difference is its arithmetic function, called the sigmoid function or sometimes the logistic function.
-\begin{equation*}
-    \begin{split}
-        \sigma(z) & = \frac{1}{1+e^{-z}}
-    \end{split}
-\end{equation*}
+The sigmoid is a activation function which expands the functionality of a neuron. Its core difference is that the output can not only be 0 or 1
+but anything in between those. Therefore 0.5234 could be a valid output of the sigmoid function. Likewise it can
+have weights and biases functioning the same as it would for the perceptrons.
+The core difference is the arithmetic function, called the sigmoid function or sometimes the logistic function.
+\begin{figure}[hbt!]
+    \begin{equation*}
+        \begin{split}
+            \sigma(z) & = \frac{1}{1+e^{-z}}
+        \end{split}
+    \end{equation*} 
+    \caption{Function for sigma}
+\end{figure}
+\vspace{0.25cm}
 To put it more explicit with input variables, weights and bias:
-\begin{equation*}
-    \begin{split}
-        \frac{1}{1+exp(-\sum{_j}{w_jx_j-b})}
-    \end{split}
-\end{equation*}
+\begin{figure}[hbt!]
+    \begin{equation*}
+        \begin{split}
+            \frac{1}{1+exp(-\sum{_j}{w_jx_j-b})}
+        \end{split}
+    \end{equation*}
+    \caption{Explicit function for sigma}
+\end{figure}
+\vspace{0.25cm}
+\begin{figure}[hbt!]
 \begin{center}
     \begin{tikzpicture}
         \begin{axis}[
@@ -84,6 +115,11 @@ To put it more explicit with input variables, weights and bias:
             \addplot[color=red, domain=-4:4, width=2] (x,{1/(1+exp(-x))});
         \end{axis}
     \end{tikzpicture}
+    \caption{Graph for sigma}
+\end{center}
+\end{figure}
+\begin{figure}[hbt!]
+    \begin{center}
     \begin{tikzpicture}
         \begin{axis}[
                 width=0.5\textwidth,
@@ -105,60 +141,70 @@ To put it more explicit with input variables, weights and bias:
             };
         \end{axis}
     \end{tikzpicture}
+\caption{Graph for perceptrons}
 \end{center}
-Since the algebraic form of {$\sigma$} is a smoothed and not step function, it makes a huge difference in the way how weights and bias influence
-the result of a sigmoid compared to a percpetron.
-\newpage
+\end{figure}
+\vspace{0.25cm}
+Since the algebraic form of {$\sigma$} is a smoothed and not step function, it makes a huge difference in the way how weight and bias influence
+the activation of a neuron.
 
 \section{Current state}
 Object detection is dealing with two major problems and therefore can be split into two processes which are object localization and object
 classification.  \\
 There are models which have a multi layer architecture, each performing complex tasks such as analyzing, localizing and classifying each
 sections individually, making the cost high and the network in general slow but accurate.
-Models that combine functionality in one layer, so that it for instance localizes and classifies at the same time, is making the
+Models that combine functionality in one layer, where localization and classification is performed in one step, make the
 model smaller and therefore faster but less accurate.
-The trade off between accuracy and speed is something that all networks deal with especially if the goal is to have a near real time object
-detection system which is still reliable and accurate when doing so. \\
-There are multiple algorithms covering various forms of this formula, called RCNN, F-RCNN, SSD, YOLO and so forth but first I will cover
+The balance between accuracy and speed is something that all networks deal with. Especially if the goal is to have a near real time object
+detection system which is still reliable and accurate.\\
+There are multiple algorithms covering various forms of this formula, called RCNN, F-RCNN, SSD, YOLO but first I will cover
 the approach of detecting interesting regions in an image because this is the key problem in object detection.
 
 \subsection{Object Localization \& Classification}
-The segmentation of an image is the key approach to Object Localization and at the same time for Object Classification. Since images are always hierarchical the segmentation as well has
-to be hierarchical. It has to be able to cover different criteria and forms, where maybe objects are part of a bigger total or just  smaller
+The segmentation of an image is the key approach to Object Localization and at the same time for Object Classification. Since images are
+always hierarchical, meaning that each object in an image has a specific depth, the segmentation has to be hierarchical as well. It has to be able to cover different criteria and forms, where maybe
+objects are part of a bigger total or just  smaller
 objects which are inside one another. Since is not feasible to compute every possibility inside an image there has to be some kind of
 separation through grids and scales. \\
-As there are many approaches to algorithms as how to analyze and classify regions, I am going to cover three localization algorithms which
+As there are many approaches for analyzing and classifying regions, I am going to cover three localization algorithms which
 are key for object detection.
 
 \subsubsection{Exhaustive Search}
-Since an object can be located anywhere in an image the scope to look through is enormous. Making the computational cost for such a search very
-expensive. To compensate for this cost most exhaustive search approaches such as the sliding window approach, constraint the size and aspect
-ratio of the window over the grid, using weak classifiers and economic image features such as histogram of oriented gradients
-(HOG).\cite{selectivesearch} \\ 
-HOG approaches the problem of recognizing and detecting objects in an unknown image through corners. It analyzes the distribution and their
-orientation, through which he is able to separate the image into multiple partitions or detect similar regions in different images.
-\newpage \noindent
+Since an object can be located anywhere in an image the scope to look through is enormous, making the computational cost for such a search very
+expensive. To compensate for this cost most exhaustive search approaches such as the sliding window approach, have a fixed sizes and aspect
+ratios for the window. Further it uses weak classifiers and economic image features such as histogram of oriented gradients
+(HOG) to analyze each step.\cite{selectivesearch} \\ 
+HOG approaches the problem of recognizing and detecting objects in an unknown image through corners. It analyzes the distribution and 
+orientation of the corners, through which it is able to separate the image into multiple partitions or detect similar regions in different images.
 Robert K. McConnell described the concept in a patent in 1986 but it became known in 2005 through a publication of Navneet Dalal and Bill
 Triggs.\cite{hog}
-\begin{center}
-    \includegraphics[width=0.3\textwidth]{images/object_detection/Dlib_Learned-HOG-Detector.jpg} \cite{hog}
-\end{center}
-
+\begin{figure}[!hbt]
+    \caption{Output of a HOG algorithm}
+    \begin{center}
+        \includegraphics[width=0.3\textwidth]{images/object_detection/Dlib_Learned-HOG-Detector.jpg} \cite{hog}
+    \end{center}
+\end{figure}
 \subsubsection{Selective Search}
 A selective search algorithm is subjected into 3 design ideas:\\
 \begin{itemize}
     \item Capture All Scales \\ \\
         The idea is similar to the one of the Exhaustive Search that all objects have to be found. Therefore all scales have to be
-        considered as a potential region. The best approach is a hierarchical grouping, where a initial sub segmentation has to
+        considered as a potential region. The best approach is a hierarchical grouping, where an initial sub-segmentation has to
         be performed. \cite{selectivesearch}
-        \begin{center}
-            \includegraphics[width=0.5\textwidth]{images/object_detection/breakfast_fnh.jpg}\cite{sssegmentationc}
-        \end{center}
+        \begin{figure}[!hbt]
+            \caption{Segmentation of Selective Search}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{images/object_detection/breakfast_fnh.jpg}\cite{sssegmentationc}
+            \end{center}
+        \end{figure}
         After the segmentation a grouping of regions is done by similarity. After each grouping a similarity between
         resulting regions and its neighbors are being calculated. This process is done until the whole image becomes a single region.\cite{selectivesearch}
-        \begin{center}
-            \includegraphics[width=0.5\textwidth]{images/object_detection/breakfast-top-200-proposals.jpg}\cite{sssegmentationbb}
-        \end{center}
+        \begin{figure}[!hbt]
+            \caption{Results of converting the segments into bounding boxes}
+            \begin{center}
+                \includegraphics[width=0.5\textwidth]{images/object_detection/breakfast-top-200-proposals.jpg}\cite{sssegmentationbb}
+            \end{center}
+        \end{figure}
     \item Diversification \\ \\
         There is no single strategy for grouping regions together therefore multiple aspects have to be considered. Selective search
         diversifies by using a variety of color spaces with different invariance properties, by using different similarity measures and by
@@ -168,8 +214,8 @@ A selective search algorithm is subjected into 3 design ideas:\\
     \item Fast to Compute \\ \\
         Since each of these steps is a computation act, the main goal of this algorithm is to be fast and not create a bottleneck through its complexity.\cite{selectivesearch}
 \end{itemize}
-{S}\emph{color}: \\ \\
-Measures color similarities for each region, where a color histogram of 25 bins is being created and normalized
+S$_{color}$: \\ \\
+It measures color similarities for each region, where a color histogram of 25 bins is being created and normalized
 with the L1 norm. Similarity is measured using the histogram intersection:\cite{selectivesearch} \\
 \begin{center}
     \begin{equation*}
@@ -184,9 +230,9 @@ This histogram can be efficiently propagated through the hierarchy by: \\
         \end{split}
     \end{equation*}\cite{selectivesearch}
 \end{center}
-{S}\emph{texture}: \\ \\
+S$_{texture}$: \\ \\
 Selective Search measures texture similarity through the usage of the SIFT algorithm. SIFT stands for scale invariant
-feature transform and is a algorithm to detect and describe features in a region. Further more it takes Gaussian derivatives
+feature transform and is an algorithm to detect and describe features in a region. Furthermore it takes Gaussian derivatives
 in eight orientations for each color channel, where a 10 bin histogram is being extracted. Similarity is measured
 using the same histogram intersections and the propagation function is the same as for the color.\cite{selectivesearch}
 \begin{center}
@@ -194,7 +240,7 @@ using the same histogram intersections and the propagation function is the same 
         S_{texture}(r_i,r_j) = \sum_{n=1}^{n} min(t_i^{k},t_j^{k})
     \end{equation*}\cite{selectivesearch}
 \end{center}
-{S}\emph{size}: \\ \\
+S$_{size}$: \\ \\
 In this step selective search encourages to merge small regions early. Doing so forces the algorithm to focus
 on smaller regions which have not been merged yet first. This is encouraged because it hinders the algorithm from one
 region gobbling up the rest of them one by one.\cite{selectivesearch}
@@ -205,8 +251,8 @@ region gobbling up the rest of them one by one.\cite{selectivesearch}
         \end{split}
     \end{equation*}\cite{selectivesearch}
 \end{center}
-{S}\emph{fill}: \\ \\
-Measures how well region r$_i$ and r$_j$ fit into each other. The idea is to fill gaps if r{$_i$} is contained in
+S$_{fill}$: \\ \\
+It measures how well region r$_i$ and r$_j$ fit into each other. The idea is to fill gaps if r{$_i$} is contained in
 r$_j$, therefore it is only logical that these regions should be merged first in order to avoid holes. On the other hand
 if r$_i$ and r$_j$ hardly touch each other it may form a strange region and therefore should not be merged. To keep
 the process fast only the size of the regions and their contained bounding boxes are being used. Specifically the defined
@@ -225,19 +271,21 @@ The final formula which measures the similarity is a combination of the above 4:
         s(r_i,r_j) = a1s_{coulor}(r_i,r_j) + a2s_{texture}(r_i,r_j) + a3s_{size}(r_i,r_j) + a4s_{fill}(r_i,r_j)
     \end{equation*}\cite{selectivesearch}
 \end{center}
-\newpage
 \subsubsection{Region Proposal Network in Faster R-CNN}
 A Region Proposal Network (RPN) takes an image of any size as an input and outputs a set of rectangular object proposals, each with an
 objectness score. After the initial proposals, a sliding window is being run over the feature map. The sliding
 window is of size n x n. In this example it will be of size 3 x 3. So for each sliding window a set of 9 anchors are being generated, 3
 scales and 3 aspect ratios.\cite{fasterrcnn}
-\begin{center}
-    \includegraphics[width=0.5\textwidth]{images/object_detection/rpn_anchors.png}
-\end{center}
+\begin{figure}[!hbt]
+    \caption{Properties of a sliding window in RPN}
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{images/object_detection/rpn_anchors.png}
+    \end{center}
+\end{figure}
 Furthermore for each sliding window anchor a value called Intersection of Union short IoU is being calculated. IoU represents the value of how
 much the predicted bounding box overlaps with the ground truth. The ground truth is the basis for teaching the localization network and is a
-set of data predefined by a human telling the network where, which objects are in the image. \\
-The general idea of IoU is:\cite{fasterrcnn}
+set of data predefined by a human telling the network where, which objects are in the image.\cite{fasterrcnn} \\ \\
+The general idea of IoU is:
 \begin{center}
     \begin{equation*}
         p =
