@@ -1,9 +1,10 @@
 \begin{document}
 During this project I trained multiple Tensorflow models and wrote an application which utilizes a trained model through Tensorflow and is
 able to detect objects in an image, video or web camera stream fairly well. Comparing the object detection results of Faster RCNN and SSD,
-it is noticeable that the F-RCNN algorithm is performing better in regards to accuracy but is lacks in speed. The reason for that as mentioned during this report, is the complex
-structure of the neural network. It performs each task per layer resulting in a slower Model. The SSD algorithm is performing the whole step in one go
-and therefore is faster but Less accurate. The results and performances of the trained models vary and further
+it is noticeable that the F-RCNN algorithm is performing better in regards to accuracy but lacks in speed. The reason for that as mentioned during this report, is the complex
+structure of the neural network where each task has its own layer resulting in a slower model.\\ The SSD algorithm on the other hand is performing better
+in regards of speed since the whole detection and classification is performed in one step but therefore losses in accuracy occur. \\ \\
+The results and performances of the trained models vary and further
 research for improving these need to be done. Possible feature extensions for the application could be having multiple models set up and
 active which could be used for comparing and running analyzes of the performances of different models.\\\\
 To sum it up, object detection has evolved and probably will evolve further in the future. We can see at its current state that it is able

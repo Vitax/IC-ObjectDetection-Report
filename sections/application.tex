@@ -4,9 +4,14 @@ Tensorflow standards and passed it on to the model for object detection. Using t
 on images,videos and web camera streams I started developing an application in Python with PyQt Version 5.\\
 PyQt is a cross-platform GUI toolkit which is similar to Java Swift and is an easy library to develop an UI with. It takes ideas and concepts
 from different roots and implements a layer based architecture for elements.
-\begin{center}
-    \includegraphics[width=0.75\textwidth]{images/application/Application.png}
-\end{center}
+\vspace{0.25cm}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.75\textwidth]{images/application/Application.png}
+    \end{center}
+    \caption{Application after object detection}
+\end{figure}
+\vspace{0.25cm}
 There were several requirements for the application from the start:
 \begin{itemize}
     \item Use any model trained with Tensorflow \\ \\
@@ -16,9 +21,12 @@ There were several requirements for the application from the start:
     \item Change used model, label map and class number on runtime \\ \\
         For this I implemented a config class where I will store the path's of the selected inference graph, the label map and the
         number of classes set by the user. These if existent will be queried for on startup and with them a Tensorflow model will be instantiated.\\
-        \begin{center}
-            \includegraphics[width=0.75\textwidth]{images/application/application_config.png}
-        \end{center}
+        \begin{figure}[H]
+            \begin{center}
+                \includegraphics[width=0.75\textwidth]{images/application/application_config.png}
+            \end{center}
+            \caption{Application config section}
+        \end{figure}
     \item Initialize Tensorflow only when required (application start, configuration change)\\ \\
         To cover for the changes of the configuration I am checking if there are any changes in the configuration file and I am recreating the
         Tensorflow model on the fly and if not, the old one will be used.

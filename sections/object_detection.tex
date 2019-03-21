@@ -12,18 +12,18 @@ are many types of subsets for neurons, for the purpose of this report I will exp
 Perceptrons were developed in 1957 by the scientist Frank Rosenblatt, inspired by earlier works from Waren McCulloch and Walter
 Pitts.\cite{neuralnetworksanddeeplearning}
 \vspace{0.25cm}
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \caption{Simple neuron}
     \begin{center}
         \includegraphics[width=0.25\textwidth]{images/neurons/simple_neuron.png}
     \end{center}
     \label{fig:simple-neuron}
 \end{figure}
-\vspace{0.25cm}
+\vspace{0.25cm} \noindent
 In this example our neuron \ref{fig:simple-neuron} has 2 input variables and one output, in theory it can have more or less. Furthermore Frank Rosenblatt proposes
 the concept of weights for each input variable saying which variable is preferred over another one.
-\vspace{0.25cm}
-\begin{figure}[hbt!]
+\vspace{0.25cm} 
+\begin{figure}[H]
     \caption{Activation function of a perceptron}
     \begin{equation*}
         output=
@@ -33,19 +33,19 @@ the concept of weights for each input variable saying which variable is preferre
         \end{cases}
     \end{equation*}
 \end{figure}
-\newpage \noindent
+\vspace{0.25cm} \noindent
 A single neuron is by no means comparable to a decision making of a human being, but it can weigh variables and make decisions
 by defining a threshold when a true or false should be evaluated. Another way to create a conditional behavior is to use a bias
 instead of a threshold.
 \vspace{0.25cm}
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \caption{Neuron with bias}
     \begin{center}
         \includegraphics[width=0.25\textwidth]{images/neurons/simple_neuron_bias.png}
     \end{center} 
 \end{figure}
 \vspace{0.25cm}
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \caption{Activation function with bias}
     \begin{equation*}
         output=
@@ -55,19 +55,19 @@ instead of a threshold.
         \end{cases}
     \end{equation*}
 \end{figure}
-\vspace{0.25cm}
-A whole network of these neurons is able to perform more complex decision making. The network below is a feed forward network, but there are
+\vspace{0.25cm} \noindent
+A whole network of these neurons is able to perform more complex decision making. The network \ref{fig:neural-network} is a feed forward network, but there are
 bidirectional networks and even forms where the neuron passes its output back to itself. 
 \vspace{0.25cm}
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \caption{Example neural network}
     \begin{center}
         \includegraphics[width=0.5\textwidth]{images/neurons/neural_network.png}
     \end{center}
     \label{fig:neural-network}
 \end{figure}
-\newpage \noindent
-The columns in the network \ref{fig:neural-network} are called layers. The first column is referred to as the input layer and the last one as the output. All the
+\vspace{0.25cm} \noindent
+Each column in the network \ref{fig:neural-network} is called layer. The first column is referred to as the input layer and the last one as the output. All the
 ones in between are called hidden layers. \\
 Since the result of a perceptron can only be one or zero (true or false), one major problem which occurs when using perceptrons in more
 complex neural networks is that biases and weights can have weird and unwanted effects. Making perceptrons trigger where they should not.
@@ -78,7 +78,7 @@ The sigmoid is a activation function which expands the functionality of a neuron
 but anything in between those. Therefore 0.5234 could be a valid output of the sigmoid function. Likewise it can
 have weights and biases functioning the same as it would for the perceptrons.
 The core difference is the arithmetic function, called the sigmoid function or sometimes the logistic function.
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \begin{equation*}
         \begin{split}
             \sigma(z) & = \frac{1}{1+e^{-z}}
@@ -88,7 +88,7 @@ The core difference is the arithmetic function, called the sigmoid function or s
 \end{figure}
 \vspace{0.25cm}
 To put it more explicit with input variables, weights and bias:
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \begin{equation*}
         \begin{split}
             \frac{1}{1+exp(-\sum{_j}{w_jx_j-b})}
@@ -97,7 +97,7 @@ To put it more explicit with input variables, weights and bias:
     \caption{Explicit function for sigma}
 \end{figure}
 \vspace{0.25cm}
-\begin{figure}[hbt!]
+\begin{figure}[H]
 \begin{center}
     \begin{tikzpicture}
         \begin{axis}[
@@ -118,7 +118,7 @@ To put it more explicit with input variables, weights and bias:
     \caption{Graph for sigma}
 \end{center}
 \end{figure}
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \begin{center}
     \begin{tikzpicture}
         \begin{axis}[
@@ -144,7 +144,7 @@ To put it more explicit with input variables, weights and bias:
 \caption{Graph for perceptrons}
 \end{center}
 \end{figure}
-\vspace{0.25cm}
+\vspace{0.25cm} \noindent
 Since the algebraic form of {$\sigma$} is a smoothed and not step function, it makes a huge difference in the way how weight and bias influence
 the activation of a neuron.
 
@@ -162,7 +162,7 @@ the approach of detecting interesting regions in an image because this is the ke
 
 \subsection{Object Localization \& Classification}
 The segmentation of an image is the key approach to Object Localization and at the same time for Object Classification. Since images are
-always hierarchical, meaning that each object in an image has a specific depth, the segmentation has to be hierarchical as well. It has to be able to cover different criteria and forms, where maybe
+always hierarchical, meaning that each object in an image has a specific place in depth, the segmentation has to be hierarchical as well. It has to be able to cover different criteria and forms, where maybe
 objects are part of a bigger total or just  smaller
 objects which are inside one another. Since is not feasible to compute every possibility inside an image there has to be some kind of
 separation through grids and scales. \\
@@ -258,6 +258,7 @@ if r$_i$ and r$_j$ hardly touch each other it may form a strange region and ther
 the process fast only the size of the regions and their contained bounding boxes are being used. Specifically the defined
 BB$_{ij}$ has to be a tight bounding box around r$_i$ and r$_j$. Now S$_{fill}$ is the fraction of the image
 contained in BB$_{ij}$ which is not by the regions of r$_i$ and r$_j$.\cite{selectivesearch}
+\vspace{0.25cm}
 \begin{center}
     \begin{equation*}
         \begin{split}
@@ -265,27 +266,33 @@ contained in BB$_{ij}$ which is not by the regions of r$_i$ and r$_j$.\cite{sele
         \end{split}
     \end{equation*}\cite{selectivesearch}
 \end{center}
+\vspace{0.25cm} \noindent
 The final formula which measures the similarity is a combination of the above 4:
+\vspace{0.25cm} \noindent
 \begin{center}
     \begin{equation*}
         s(r_i,r_j) = a1s_{coulor}(r_i,r_j) + a2s_{texture}(r_i,r_j) + a3s_{size}(r_i,r_j) + a4s_{fill}(r_i,r_j)
     \end{equation*}\cite{selectivesearch}
 \end{center}
+\vspace{0.25cm} \noindent
 \subsubsection{Region Proposal Network in Faster R-CNN}
 A Region Proposal Network (RPN) takes an image of any size as an input and outputs a set of rectangular object proposals, each with an
 objectness score. After the initial proposals, a sliding window is being run over the feature map. The sliding
 window is of size n x n. In this example it will be of size 3 x 3. So for each sliding window a set of 9 anchors are being generated, 3
 scales and 3 aspect ratios.\cite{fasterrcnn}
+\vspace{0.25cm} \noindent
 \begin{figure}[!hbt]
     \caption{Properties of a sliding window in RPN}
     \begin{center}
         \includegraphics[width=0.5\textwidth]{images/object_detection/rpn_anchors.png}
     \end{center}
 \end{figure}
+\vspace{0.25cm} \noindent
 Furthermore for each sliding window anchor a value called Intersection of Union short IoU is being calculated. IoU represents the value of how
 much the predicted bounding box overlaps with the ground truth. The ground truth is the basis for teaching the localization network and is a
 set of data predefined by a human telling the network where, which objects are in the image.\cite{fasterrcnn} \\ \\
 The general idea of IoU is:
+\vspace{0.25cm}
 \begin{center}
     \begin{equation*}
         p =
@@ -296,6 +303,7 @@ The general idea of IoU is:
         \end{cases}
     \end{equation*}
 \end{center}
+\vspace{0.25cm} \noindent
 In the final step the results of the spatial sliding window is being fed into a smaller network which has two tasks. Classification (cls)
 and regression (reg). The output of the regression represents a bounding box with (x, y, w, h). The classification value is a probability
 indicating whether the bounding box contains a object or not.\cite{fasterrcnn}

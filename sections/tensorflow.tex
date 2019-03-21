@@ -6,11 +6,11 @@
     %   - training a model
     %   - analysis of model
 \begin{document}
-TensorFlow™ is an open source software library for high performance numerical computation. Its flexible architecture allows easy deployment
+''TensorFlow™ is an open source software library for high performance numerical computation. Its flexible architecture allows easy deployment
 of computation across a variety of platforms (CPUs, GPUs, TPUs), and from desktops to clusters of servers to mobile and edge devices.
 Originally developed by researchers and engineers from the Google Brain team within Google’s AI organization, it comes with strong support
 for machine learning and deep learning and the flexible numerical computation core is used across many other scientific
-domains.\cite{tensorflow}
+domains.''\cite{tensorflow}
 
 \section{Writing Object Detection models with Tensorflow}\label{train-with-tensorflow}
 Tensorflow is a full fledged machine learning library which supports the programming languages C++, Python. It is a multi purpose library
@@ -67,7 +67,7 @@ with the amount of data provided to the model.\\\\
 Secondly I downloaded the models from Tensorflow, one was the faster-rcnn-inception-v2-coco and the ssd-mobilnet-v2-coco trained with the
 dataset from MSCOCO. These are 2 models where the first one is implemented with the Faster-RCNN and the latter with SSD algorithm. \\
 \vspace{0.25cm}
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \begin{center}
         \begin{tabular}{|c|c|c|c|c|}
             \hline
@@ -84,21 +84,21 @@ to the original Tensorflow model which I used for transfer learning. But they we
 model through transfer learning a degradation of. But they were still better then the initial attempts of training. The following
 graphs are smoothed by a factor of 0.6 and showcase the performance of one of my models.
 \vspace{0.25cm}
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \begin{center}
-        \caption{mAP}
-        \subfigure[mAP per Stage]{\includegraphics[width=0.45\textwidth]{images/tensorflow/frcnn-map.png}}
-        \subfigure[mAP @0.5 IoU]{\includegraphics[width=0.45\textwidth]{images/tensorflow/frcnn-map@0-50iou.png}}
-        \subfigure[mAP @0.75 IoU]{\includegraphics[width=0.45\textwidth]{images/tensorflow/frcnn-map@0-75iou.png}}
+        \caption{mAP of a model}
+        \subfigure[mAP per Stage]{\includegraphics[width=0.5\textwidth]{images/tensorflow/frcnn-map.png}}
+        \subfigure[mAP @0.5 IoU]{\includegraphics[width=0.5\textwidth]{images/tensorflow/frcnn-map@0-50iou.png}}
+        \subfigure[mAP @0.75 IoU]{\includegraphics[width=0.5\textwidth]{images/tensorflow/frcnn-map@0-75iou.png}}
     \end{center}
 \end{figure}
 \newpage \noindent
 Even though the mAP is increasing over the duration of the training session it is noticeable that it is not really increasing in performance but
 overfiting through the following graphs.
 \vspace{0.25cm}
-\begin{figure}[hbt!]
+\begin{figure}[H]
     \begin{center}
-        \caption{Loss of models}
+        \caption{Loss of a model}
         \subfigure[Box Classifier Loss]{\includegraphics[width=0.45\textwidth]{images/tensorflow/frcnn-classification_loss.png}}
         \subfigure[Box Classifier Localization Loss]{\includegraphics[width=0.45\textwidth]{images/tensorflow/frcnn-box_localization_loss.png}}
         \subfigure[RPN Localization Loss]{\includegraphics[width=0.45\textwidth]{images/tensorflow/frcnn-rpn_localization_loss.png}}
